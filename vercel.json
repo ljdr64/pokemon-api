@@ -1,0 +1,26 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/",
+      "destination": "public/index.html"
+    },
+    {
+      "source": "/(.+)",
+      "destination": "public/$1"
+    }
+  ],
+  "builds": [
+    {
+      "src": "/api/index.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@now/static"
+    }
+  ]
+}
