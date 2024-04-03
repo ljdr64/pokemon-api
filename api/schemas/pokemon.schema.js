@@ -1,85 +1,38 @@
 const Joi = require('joi');
 
-const abilities = Joi.array()
-  .items(
-    Joi.object({
-      ability: Joi.string().required(),
-      is_hidden: Joi.boolean().required(),
-      slot: Joi.number().integer().required(),
-    })
-  )
-  .required();
-const base_experience = Joi.number().integer().required();
-const height = Joi.number().integer().required();
-const held_items = Joi.array()
-  .items(Joi.object({ item: Joi.string() }))
-  .required();
-const id = Joi.number().integer().required();
-const is_default = Joi.boolean().required();
-const name = Joi.string().required();
-const order = Joi.number().integer().required();
+const abilities = Joi.array().items(Joi.object());
+const base_experience = Joi.number().integer();
+const height = Joi.number().integer();
+const held_items = Joi.array().items(Joi.object());
+const id = Joi.number().integer();
+const is_default = Joi.boolean();
+const name = Joi.string();
+const order = Joi.number().integer();
 const sprites = Joi.object({
   back_default: Joi.string(),
   front_default: Joi.string(),
-}).required();
-const stats = Joi.array()
-  .items(
-    Joi.object({
-      base_stat: Joi.number().integer(),
-      effort: Joi.number().integer(),
-      stat: Joi.string(),
-    })
-  )
-  .required();
-const types = Joi.array()
-  .items(
-    Joi.object({
-      slot: Joi.number().integer(),
-      type: Joi.string(),
-    })
-  )
-  .required();
-const weight = Joi.number().integer().required();
-
-const abilitySchema = Joi.object({
-  ability: Joi.string(),
-  is_hidden: Joi.boolean(),
-  slot: Joi.number().integer(),
-}).required();
-
-const typeSchema = Joi.object({
-  slot: Joi.number().integer(),
-  type: Joi.string(),
-}).required();
-
-const statSchema = Joi.object({
-  base_stat: Joi.number().integer(),
-  effort: Joi.number().integer(),
-  stat: Joi.string(),
-}).required();
+});
+const stats = Joi.array().items(Joi.object());
+const types = Joi.array().items(Joi.object());
+const weight = Joi.number().integer();
 
 const createPokemonSchema = Joi.object({
-  abilities: Joi.array().items(abilitySchema).required(),
-  base_experience: Joi.number().integer().required(),
-  height: Joi.number().integer().required(),
-  held_items: Joi.array()
-    .items(Joi.object({ item: Joi.string() }))
-    .required(),
-  id: Joi.number().integer().required(),
-  is_default: Joi.boolean().required(),
-  name: Joi.string().required(),
-  order: Joi.number().integer().required(),
-  sprites: Joi.object({
-    back_default: Joi.string().required(),
-    front_default: Joi.string().required(),
-  }).required(),
-  stats: Joi.array().items(statSchema).required(),
-  types: Joi.array().items(typeSchema).required(),
-  weight: Joi.number().integer().required(),
+  abilities: abilities.required(),
+  base_experience: base_experience.required(),
+  height: height.required(),
+  held_items: held_items.required(),
+  id: id.required(),
+  is_default: is_default.required(),
+  name: name.required(),
+  order: order.required(),
+  sprites: sprites.required(),
+  stats: stats.required(),
+  types: types.required(),
+  weight: weight.required(),
 });
 
 const updatePokemonSchema = Joi.object({
-  id: id,
+  id: id.required(),
   name: name,
   abilities: abilities,
   base_experience: base_experience,
@@ -91,16 +44,11 @@ const updatePokemonSchema = Joi.object({
   stats: stats,
   types: types,
   weight: weight,
-})
-  .or('id', 'name')
-  .required();
+}).min(1);
 
 const getPokemonSchema = Joi.object({
   id: id,
-  name: name,
-})
-  .or('id', 'name')
-  .required();
+});
 
 module.exports = {
   createPokemonSchema,

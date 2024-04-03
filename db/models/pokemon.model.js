@@ -7,11 +7,12 @@ const PokemonSchema = {
   base_experience: DataTypes.INTEGER,
   height: DataTypes.INTEGER,
   held_items: DataTypes.JSON,
-  id: DataTypes.INTEGER,
-  is_default: {
-    type: DataTypes.BOOLEAN,
+  id: {
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    unique: true,
   },
+  is_default: DataTypes.BOOLEAN,
   name: DataTypes.STRING,
   order: DataTypes.INTEGER,
   sprites: DataTypes.JSON,

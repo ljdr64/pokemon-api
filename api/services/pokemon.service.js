@@ -15,20 +15,11 @@ class PokemonService {
     return pokemons;
   }
 
-  async findOne(idOrName) {
-    let pokemon;
-    if (Number.isInteger(idOrName)) {
-      // Si el idOrName es un número, buscar por ID
-      pokemon = await models.Pokemon.findByPk(idOrName);
-    } else {
-      // Si el idOrName es una cadena, buscar por nombre
-      pokemon = await models.Pokemon.findOne({ where: { name: idOrName } });
-    }
-
+  async findOne(id) {
+    const pokemon = await models.Pokemon.findByPk(id);
     if (!pokemon) {
       throw boom.notFound('Pokemon not found');
     }
-
     return pokemon;
   }
 
