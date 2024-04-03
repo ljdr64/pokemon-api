@@ -14,7 +14,18 @@ const service = new PokemonService();
 router.get('/', async (req, res, next) => {
   try {
     const pokemons = await service.find();
-    res.json(pokemons);
+
+    // Ordenar los Pokémon por su ID numérica
+    pokemons.sort((a, b) => a.id - b.id);
+
+    const formattedPokemons = pokemons.map((pokemon) => ({
+      name: pokemon.name,
+      url: `${req.protocol}://${req.get('host')}/api/v1/pokemon/${pokemon.id}`,
+    }));
+    res.json({
+      count: formattedPokemons.length,
+      results: formattedPokemons,
+    });
   } catch (error) {
     next(error);
   }
