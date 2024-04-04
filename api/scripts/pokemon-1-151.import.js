@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function importPokemonData() {
   try {
-    for (let id = 3; id <= 151; id++) {
+    for (let id = 1; id <= 151; id++) {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${id}`
       );
@@ -40,7 +40,7 @@ async function importPokemonData() {
       };
 
       // Mostrar los datos importados en la consola
-      console.log('Datos importados de Ivysaur:', pokemon);
+      console.log('Datos importados de Pokemon:', pokemon);
 
       // Enviar los datos a tu API
       const apiResponse = await axios.post(
@@ -55,7 +55,7 @@ async function importPokemonData() {
       );
     }
   } catch (error) {
-    console.error('Error al importar Pokémon:', error.message);
+    console.error('Error al importar Pokemon:', error.message);
   }
 }
 
