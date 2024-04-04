@@ -32,7 +32,6 @@ const createPokemonSchema = Joi.object({
 });
 
 const updatePokemonSchema = Joi.object({
-  id: id.required(),
   name: name,
   abilities: abilities,
   base_experience: base_experience,
@@ -44,10 +43,10 @@ const updatePokemonSchema = Joi.object({
   stats: stats,
   types: types,
   weight: weight,
-}).min(1);
+});
 
 const getPokemonSchema = Joi.object({
-  id: id,
+  id: id.required(),
 });
 
 module.exports = {

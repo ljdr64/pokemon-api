@@ -22,13 +22,6 @@ const PokemonSchema = {
 };
 
 class Pokemon extends Model {
-  static associate(models) {
-    this.hasMany(models.Product, {
-      as: 'products',
-      foreignKey: 'pokemonId',
-    });
-  }
-
   static config(sequelize) {
     return {
       sequelize,
