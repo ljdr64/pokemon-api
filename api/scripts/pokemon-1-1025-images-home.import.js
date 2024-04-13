@@ -4,8 +4,8 @@ const path = require('path');
 
 async function importPokemonImages() {
   try {
-    for (let id = 1; id <= 151; id++) {
-      const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+    for (let id = 1; id <= 1025; id++) {
+      const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
 
       // Obtener el nombre del archivo de imagen
       const imageName = `${id}.png`;
@@ -16,7 +16,7 @@ async function importPokemonImages() {
       });
 
       // Guardar la imagen localmente
-      const imagePath = path.join(__dirname, `images-artwork/${imageName}`);
+      const imagePath = path.join(__dirname, `images-home/${imageName}`);
       fs.writeFileSync(imagePath, imageResponse.data);
 
       console.log(

@@ -2,40 +2,32 @@ const axios = require('axios');
 
 async function importPokemonData() {
   try {
-    for (let id = 1; id <= 151; id++) {
+    for (let id = 1; id <= 1025; id++) {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${id}`
       );
       const pokemonData = response.data;
       // Procesar los datos
       const pokemon = {
-        abilities: pokemonData.abilities.map((ability) => ({
-          ability: ability.ability.name,
-          is_hidden: ability.is_hidden,
-          slot: ability.slot,
-        })),
+        abilities: pokemonData.abilities.map((ability) => ability.ability.name),
         base_experience: pokemonData.base_experience,
         height: pokemonData.height,
-        held_items: pokemonData.held_items.map((item) => ({
-          item: item.item.name,
-        })),
+        held_items: pokemonData.held_items.map((item) => item.item.name),
         id: pokemonData.id,
-        is_default: pokemonData.is_default,
         name: pokemonData.name,
         order: pokemonData.order,
         sprites: {
           back_default: pokemonData.sprites.back_default,
           front_default: pokemonData.sprites.front_default,
+          dream_world: pokemonData.sprites.other.dream_world.front_default,
+          home: pokemonData.sprites.other.home.front_default,
+          official_artwork:
+            pokemonData.sprites.other['official-artwork'].front_default,
         },
-        stats: pokemonData.stats.map((stat) => ({
-          base_stat: stat.base_stat,
-          effort: stat.effort,
-          stat: stat.stat.name,
-        })),
-        types: pokemonData.types.map((type) => ({
-          slot: type.slot,
-          type: type.type.name,
-        })),
+        stats: Object.fromEntries(
+          pokemonData.stats.map((stat) => [stat.stat.name, stat.base_stat])
+        ),
+        types: pokemonData.types.map((type) => type.type.name),
         weight: pokemonData.weight,
       };
 

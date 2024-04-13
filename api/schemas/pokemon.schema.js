@@ -1,19 +1,21 @@
 const Joi = require('joi');
 
-const abilities = Joi.array().items(Joi.object());
+const abilities = Joi.array();
 const base_experience = Joi.number().integer();
 const height = Joi.number().integer();
-const held_items = Joi.array().items(Joi.object());
+const held_items = Joi.array();
 const id = Joi.number().integer();
-const is_default = Joi.boolean();
 const name = Joi.string();
 const order = Joi.number().integer();
 const sprites = Joi.object({
   back_default: Joi.string(),
   front_default: Joi.string(),
+  dream_world: Joi.string(),
+  home: Joi.string(),
+  official_artwork: Joi.string(),
 });
-const stats = Joi.array().items(Joi.object());
-const types = Joi.array().items(Joi.object());
+const stats = Joi.object();
+const types = Joi.array();
 const weight = Joi.number().integer();
 
 const createPokemonSchema = Joi.object({
@@ -22,7 +24,6 @@ const createPokemonSchema = Joi.object({
   height: height.required(),
   held_items: held_items.required(),
   id: id.required(),
-  is_default: is_default.required(),
   name: name.required(),
   order: order.required(),
   sprites: sprites.required(),
@@ -37,7 +38,6 @@ const updatePokemonSchema = Joi.object({
   base_experience: base_experience,
   height: height,
   held_items: held_items,
-  is_default: is_default,
   order: order,
   sprites: sprites,
   stats: stats,

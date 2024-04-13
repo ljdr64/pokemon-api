@@ -12,7 +12,6 @@ const PokemonSchema = {
     primaryKey: true,
     unique: true,
   },
-  is_default: DataTypes.BOOLEAN,
   name: DataTypes.STRING,
   order: DataTypes.INTEGER,
   sprites: DataTypes.JSON,

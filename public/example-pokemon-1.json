@@ -1,68 +1,32 @@
 {
   "abilities": [
-    {
-      "ability": "overgrow",
-      "is_hidden": false,
-      "slot": 1
-    },
-    {
-      "ability": "chlorophyll",
-      "is_hidden": true,
-      "slot": 3
-    }
+    "overgrow",
+    "chlorophyll"
   ],
   "base_experience": 64,
   "height": 7,
   "held_items": [],
   "id": 1,
-  "is_default": true,
   "name": "bulbasaur",
   "order": 1,
   "sprites": {
     "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
-    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+    "dream_world": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
+    "home": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png",
+    "official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
   },
-  "stats": [
-    {
-      "base_stat": 45,
-      "effort": 0,
-      "stat": "hp"
-    },
-    {
-      "base_stat": 49,
-      "effort": 0,
-      "stat": "attack"
-    },
-    {
-      "base_stat": 49,
-      "effort": 0,
-      "stat": "defense"
-    },
-    {
-      "base_stat": 65,
-      "effort": 1,
-      "stat": "special-attack"
-    },
-    {
-      "base_stat": 65,
-      "effort": 0,
-      "stat": "special-defense"
-    },
-    {
-      "base_stat": 45,
-      "effort": 0,
-      "stat": "speed"
-    }
-  ],
+  "stats": {
+    "hp": 45,
+    "attack": 49,
+    "defense": 49,
+    "special-attack": 65,
+    "special-defense": 65,
+    "speed": 45
+  },
   "types": [
-    {
-      "slot": 1,
-      "type": "grass"
-    },
-    {
-      "slot": 2,
-      "type": "poison"
-    }
+    "grass",
+    "poison"
   ],
   "weight": 69
 }
