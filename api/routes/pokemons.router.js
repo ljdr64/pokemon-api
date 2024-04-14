@@ -13,17 +13,50 @@ const service = new PokemonService();
 
 router.get('/', async (req, res, next) => {
   try {
+    // Obtener el número de página solicitado (por defecto 1 si no se proporciona)
+    const page = parseInt(req.query.page) || 1;
+
+    // Definir el tamaño de la página
+    const pageSize = 20;
+
+    // Calcular el índice de inicio y fin para la página solicitada
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+
     const pokemons = await service.find();
 
     // Ordenar los Pokémon por su ID numérica
     pokemons.sort((a, b) => a.id - b.id);
 
-    const formattedPokemons = pokemons.map((pokemon) => ({
+    // Obtener los Pokémon para la página solicitada
+    const paginatedPokemons = pokemons.slice(startIndex, endIndex);
+
+    // Formatear los Pokémon para la respuesta
+    const formattedPokemons = paginatedPokemons.map((pokemon) => ({
       name: pokemon.name,
       url: `${req.protocol}://${req.get('host')}/api/v1/pokemon/${pokemon.id}`,
     }));
+
+    // Crear enlaces para la paginación
+    let nextLink = null;
+    let prevLink = null;
+
+    if (endIndex < pokemons.length) {
+      nextLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?page=${
+        page + 1
+      }`;
+    }
+    if (startIndex > 0) {
+      prevLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?page=${
+        page - 1
+      }`;
+    }
+
+    // Enviar la respuesta con los resultados paginados y enlaces de paginación
     res.json({
-      count: formattedPokemons.length,
+      count: pokemons.length,
+      next: nextLink,
+      previous: prevLink,
       results: formattedPokemons,
     });
   } catch (error) {
