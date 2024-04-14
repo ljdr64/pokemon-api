@@ -18,6 +18,9 @@ const stats = Joi.object();
 const types = Joi.array();
 const weight = Joi.number().integer();
 
+const limit = Joi.number().integer();
+const offset = Joi.number().integer();
+
 const createPokemonSchema = Joi.object({
   abilities: abilities.required(),
   base_experience: base_experience.required(),
@@ -49,8 +52,14 @@ const getPokemonSchema = Joi.object({
   id: id.required(),
 });
 
+const queryPokemonSchema = Joi.object({
+  limit,
+  offset,
+});
+
 module.exports = {
   createPokemonSchema,
   updatePokemonSchema,
   getPokemonSchema,
+  queryPokemonSchema,
 };

@@ -10,8 +10,14 @@ class PokemonService {
     return newPokemon;
   }
 
-  async find() {
-    const pokemons = await models.Pokemon.findAll();
+  async find(query) {
+    const options = {};
+    const { limit, offset } = query;
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    const pokemons = await models.Pokemon.findAll(options);
     return pokemons;
   }
 

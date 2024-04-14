@@ -6,63 +6,64 @@ const {
   createPokemonSchema,
   updatePokemonSchema,
   getPokemonSchema,
+  queryPokemonSchema,
 } = require('../schemas/pokemon.schema');
 
 const router = express.Router();
 const service = new PokemonService();
 
-router.get('/', async (req, res, next) => {
-  try {
-    // Obtener el número de página solicitado (por defecto 1 si no se proporciona)
-    const page = parseInt(req.query.page) || 1;
+router.get(
+  '/',
+  validatorHandler(queryPokemonSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      // Definir el límite de elementos por página
+      const limit = parseInt(req.query.limit) || 20; // Por defecto, mostraremos 20 elementos por página
 
-    // Definir el tamaño de la página
-    const pageSize = 20;
+      // Calcular el offset basado en el número de página y el límite
+      const offset = parseInt(req.query.offset) || 0; // Por defecto, el desplazamiento será 0 si no se proporciona
 
-    // Calcular el índice de inicio y fin para la página solicitada
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = page * pageSize;
+      const pokemons = await service.find(req.query);
 
-    const pokemons = await service.find();
+      // Ordenar los Pokémon por su ID numérica
+      pokemons.sort((a, b) => a.id - b.id);
 
-    // Ordenar los Pokémon por su ID numérica
-    pokemons.sort((a, b) => a.id - b.id);
+      // Obtener los Pokémon para la página solicitada
+      const paginatedPokemons = pokemons;
 
-    // Obtener los Pokémon para la página solicitada
-    const paginatedPokemons = pokemons.slice(startIndex, endIndex);
+      // Formatear los Pokémon para la respuesta
+      const formattedPokemons = paginatedPokemons.map((pokemon) => ({
+        name: pokemon.name,
+        url: `${req.protocol}://${req.get('host')}/api/v1/pokemon/${
+          pokemon.id
+        }`,
+      }));
 
-    // Formatear los Pokémon para la respuesta
-    const formattedPokemons = paginatedPokemons.map((pokemon) => ({
-      name: pokemon.name,
-      url: `${req.protocol}://${req.get('host')}/api/v1/pokemon/${pokemon.id}`,
-    }));
+      // Crear enlaces para la paginación
+      let nextLink = null;
+      let prevLink = null;
 
-    // Crear enlaces para la paginación
-    let nextLink = null;
-    let prevLink = null;
+      if (offset > 0)
+        prevLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?offset=${
+          offset - limit
+        }&limit=${limit}`;
 
-    if (endIndex < pokemons.length) {
-      nextLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?page=${
-        page + 1
-      }`;
+      nextLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?offset=${
+        offset + limit
+      }&limit=${limit}`;
+
+      // Enviar la respuesta con los resultados paginados y enlaces de paginación
+      res.json({
+        count: pokemons.length,
+        next: nextLink,
+        previous: prevLink,
+        results: formattedPokemons,
+      });
+    } catch (error) {
+      next(error);
     }
-    if (startIndex > 0) {
-      prevLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?page=${
-        page - 1
-      }`;
-    }
-
-    // Enviar la respuesta con los resultados paginados y enlaces de paginación
-    res.json({
-      count: pokemons.length,
-      next: nextLink,
-      previous: prevLink,
-      results: formattedPokemons,
-    });
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 router.get(
   '/:id',
