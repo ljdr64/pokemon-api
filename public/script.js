@@ -54,7 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (/null/.test(match)) {
           cls = 'json-null';
         }
-        return '<span class="' + cls + '">' + match + '</span>';
+        return (
+          '<span style="word-wrap: break-word;" class="' +
+          cls +
+          '">' +
+          match +
+          '</span>'
+        );
       }
     );
   }
