@@ -8,6 +8,7 @@ const {
   getPokemonSchema,
   queryPokemonSchema,
 } = require('../schemas/pokemon.schema');
+const pokemonTotal = 151;
 
 const router = express.Router();
 const service = new PokemonService();
@@ -29,7 +30,7 @@ router.get(
       pokemons.sort((a, b) => a.id - b.id);
 
       // Obtener los Pokémon para la página solicitada
-      const paginatedPokemons = pokemons;
+      const paginatedPokemons = pokemons.slice(0, 20);
 
       // Formatear los Pokémon para la respuesta
       const formattedPokemons = paginatedPokemons.map((pokemon) => ({
@@ -44,17 +45,21 @@ router.get(
       let prevLink = null;
 
       if (offset > 0)
-        prevLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?offset=${
-          offset - limit
-        }&limit=${limit}`;
+        prevLink = `${req.protocol}://${req.get('host')}${
+          req.baseUrl
+        }?offset=${Math.max(offset - limit, 0)}&limit=${limit}`;
 
-      nextLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?offset=${
-        offset + limit
-      }&limit=${limit}`;
+      if (offset + limit < pokemonTotal) {
+        nextLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?offset=${
+          offset + limit
+        }&limit=${limit}`;
+      } else {
+        nextLink = null;
+      }
 
       // Enviar la respuesta con los resultados paginados y enlaces de paginación
       res.json({
-        count: pokemons.length,
+        count: pokemonTotal,
         next: nextLink,
         previous: prevLink,
         results: formattedPokemons,
