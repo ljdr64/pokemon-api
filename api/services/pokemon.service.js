@@ -17,8 +17,14 @@ class PokemonService {
       options.limit = limit;
       options.offset = offset;
     }
-    const pokemons = await models.Pokemon.findAll(options);
-    return pokemons;
+
+    // Realizar la consulta para obtener los Pokémon paginados y el número total
+    const result = await models.Pokemon.findAndCountAll(options);
+    const pokemons = result.rows;
+    const totalPokemons = result.count;
+
+    // Devolver tanto los Pokémon como el número total
+    return { pokemons, total: totalPokemons };
   }
 
   async findOne(id) {

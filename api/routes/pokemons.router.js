@@ -8,7 +8,6 @@ const {
   getPokemonSchema,
   queryPokemonSchema,
 } = require('../schemas/pokemon.schema');
-const pokemonTotal = 151;
 
 const router = express.Router();
 const service = new PokemonService();
@@ -24,7 +23,7 @@ router.get(
       // Calcular el offset basado en el número de página y el límite
       const offset = parseInt(req.query.offset) || 0; // Por defecto, el desplazamiento será 0 si no se proporciona
 
-      const pokemons = await service.find(req.query);
+      const { pokemons, total: totalPokemons } = await service.find(req.query);
 
       // Ordenar los Pokémon por su ID numérica
       pokemons.sort((a, b) => a.id - b.id);
@@ -49,7 +48,7 @@ router.get(
           req.baseUrl
         }?offset=${Math.max(offset - limit, 0)}&limit=${limit}`;
 
-      if (offset + limit < pokemonTotal) {
+      if (offset + limit < totalPokemons) {
         nextLink = `${req.protocol}://${req.get('host')}${req.baseUrl}?offset=${
           offset + limit
         }&limit=${limit}`;
@@ -59,7 +58,7 @@ router.get(
 
       // Enviar la respuesta con los resultados paginados y enlaces de paginación
       res.json({
-        count: pokemonTotal,
+        count: totalPokemons,
         next: nextLink,
         previous: prevLink,
         results: formattedPokemons,
