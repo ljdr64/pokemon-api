@@ -9,11 +9,11 @@
       "destination": "public/index.html"
     },
     {
-      "source": "/",
+      "source": "/about",
       "destination": "public/about.html"
     },
     {
-      "source": "/",
+      "source": "/docs",
       "destination": "public/docs.html"
     },
     {
