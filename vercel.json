@@ -16,7 +16,10 @@
   "builds": [
     {
       "src": "/api/index.js",
-      "use": "@now/node"
+      "use": "@now/node",
+      "config": {
+        "NODE_ENV": "production"
+      }
     },
     {
       "src": "public/**",
