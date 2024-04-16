@@ -9,8 +9,12 @@ const config = {
   dbHost: process.env.DB_HOST,
   dbName: process.env.DB_NAME,
   dbPort: process.env.DB_PORT,
-  dbUrl: process.env.DATABASE_URL,
+  dbUrl: '',
   dbCACert: process.env.RDS_CA_CERT,
 };
+
+config.isProd
+  ? (config.dbUrl = process.env.POSTGRES_URL)
+  : (config.dbUrl = process.env.DATABASE_URL);
 
 module.exports = { config };
