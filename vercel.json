@@ -9,6 +9,14 @@
       "destination": "public/index.html"
     },
     {
+      "source": "/",
+      "destination": "public/about.html"
+    },
+    {
+      "source": "/",
+      "destination": "public/docs.html"
+    },
+    {
       "source": "/(.+)",
       "destination": "public/$1"
     }
