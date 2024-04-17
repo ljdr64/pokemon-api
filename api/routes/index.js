@@ -17,7 +17,7 @@ function routerApi(app) {
 
   // Montar el enrutador de pokemons
   app.use('/api/v1', router);
-  router.use('/pokemon', pokemonsRouter);
+  router.use('/pokeinfo', pokemonsRouter);
 }
 
 module.exports = routerApi;

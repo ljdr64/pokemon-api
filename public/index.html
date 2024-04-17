@@ -80,6 +80,7 @@
   }
 
   .logo {
+    border-radius: 2.5rem;
     display: flex;
     width: 140px;
     padding: 4px;
@@ -98,16 +99,18 @@
 
   .navbar-left {
     display: flex;
+    align-items: center;
   }
 
   .navbar-left ul {
     margin-left: 12px;
+    align-items: center;
   }
 
   .navbar-left ul li a,
   .navbar-right ul li a {
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--just-white);
     border: 1px solid var(--just-white);
     padding: 8px;
@@ -346,7 +349,7 @@
     <div class="header--title-container">
       <nav>
         <div class="navbar-left">
-          <img src="./logos/pokemon_logo.svg.png" alt="logo" class="logo">
+          <img src="./logos/logo-pokeinfo.png" alt="logo" class="logo">
 
           <ul>
             <li>
@@ -367,7 +370,7 @@
   <main>
     <section class="main-api-container">
       <section class="main-section">
-        <h1>API de Pokémon</h1>
+        <h1>Pokeinfo API</h1>
         <p>Esta API de Pokémon es una interfaz de programación de aplicaciones (API) que proporciona acceso a
           información
           detallada sobre diferentes Pokémon. Esta API sigue el modelo de la conocida <b>PokeAPI:</b> <a
@@ -376,8 +379,8 @@
         <h2>Características principales:</h2>
 
         <h3>Consulta de Pokémon</h3>
-        <p>Obtén información detallada sobre cada Pokémon en <a href="/api/v1/pokemon/"
-            target="_blank">/api/v1/pokemon/</a>,
+        <p>Obtén información detallada sobre cada Pokémon en <a href="/api/v1/pokeinfo/"
+            target="_blank">/api/v1/pokeinfo/</a>,
           incluyendo sus
           habilidades, experiencia base, altura, peso, estadísticas y tipos:</p>
 

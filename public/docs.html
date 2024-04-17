@@ -80,6 +80,7 @@
   }
 
   .logo {
+    border-radius: 2.5rem;
     display: flex;
     width: 140px;
     padding: 4px;
@@ -98,16 +99,18 @@
 
   .navbar-left {
     display: flex;
+    align-items: center;
   }
 
   .navbar-left ul {
     margin-left: 12px;
+    align-items: center;
   }
 
   .navbar-left ul li a,
   .navbar-right ul li a {
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--just-white);
     border: 1px solid var(--just-white);
     padding: 8px;
@@ -320,7 +323,7 @@
     <div class="header--title-container">
       <nav>
         <div class="navbar-left">
-          <img src="./logos/pokemon_logo.svg.png" alt="logo" class="logo">
+          <img src="./logos/logo-pokeinfo.png" alt="logo" class="logo">
 
           <ul>
             <li>
@@ -340,7 +343,7 @@
   </header>
   <main>
     <section class="main-api-container">
-      <h1>Documentación de la API de Pokémon</h1>
+      <h1>Documentación de la Pokeinfo API</h1>
 
       <h2>Introducción</h2>
       <p>Esta API proporciona información sobre Pokémon. Puede utilizarse para obtener datos detallados sobre un
@@ -354,7 +357,7 @@
       <h3>Obtener información de un Pokémon específico</h3>
       <p class="code-container">
         <span class="code-get-button">GET</span>
-        https://{api_url}/api/v1/pokemon/{id}
+        https://{api_url}/api/v1/pokeinfo/{id}
       </p>
       <p>- Devuelve información detallada sobre un Pokémon específico identificado
         por su ID.</p>
@@ -374,7 +377,7 @@
 
       <p class="code-container">
         <span class="code-get-button">GET</span>
-        https://{api_url}/api/v1/pokemon/25
+        https://{api_url}/api/v1/pokeinfo/25
       </p>
 
       <h4>Ejemplo de respuesta (200 OK)</h4>
