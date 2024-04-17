@@ -83,48 +83,48 @@ router.get(
   }
 );
 
-router.post(
-  '/',
-  validatorHandler(createPokemonSchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const body = req.body;
-      const newPokemon = await service.create(body);
-      res.status(201).json(newPokemon);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.post(
+//   '/',
+//   validatorHandler(createPokemonSchema, 'body'),
+//   async (req, res, next) => {
+//     try {
+//       const body = req.body;
+//       const newPokemon = await service.create(body);
+//       res.status(201).json(newPokemon);
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
-router.patch(
-  '/:id',
-  validatorHandler(getPokemonSchema, 'params'),
-  validatorHandler(updatePokemonSchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const pokemon = await service.update(id, body);
-      res.json(pokemon);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.patch(
+//   '/:id',
+//   validatorHandler(getPokemonSchema, 'params'),
+//   validatorHandler(updatePokemonSchema, 'body'),
+//   async (req, res, next) => {
+//     try {
+//       const { id } = req.params;
+//       const body = req.body;
+//       const pokemon = await service.update(id, body);
+//       res.json(pokemon);
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
-router.delete(
-  '/:id',
-  validatorHandler(getPokemonSchema, 'params'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({ id });
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.delete(
+//   '/:id',
+//   validatorHandler(getPokemonSchema, 'params'),
+//   async (req, res, next) => {
+//     try {
+//       const { id } = req.params;
+//       await service.delete(id);
+//       res.status(201).json({ id });
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
 module.exports = router;

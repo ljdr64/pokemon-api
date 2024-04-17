@@ -8,11 +8,11 @@ const id = Joi.number().integer();
 const name = Joi.string();
 const order = Joi.number().integer();
 const sprites = Joi.object({
-  back_default: Joi.string(),
-  front_default: Joi.string(),
-  dream_world: Joi.string(),
-  home: Joi.string(),
-  official_artwork: Joi.string(),
+  back_default: Joi.string().allow(null),
+  front_default: Joi.string().allow(null),
+  dream_world: Joi.string().allow(null),
+  home: Joi.string().allow(null),
+  official_artwork: Joi.string().allow(null),
 });
 const stats = Joi.object();
 const types = Joi.array();

@@ -54,4 +54,4 @@ async function importPokemonData() {
 importPokemonData();
 // Para importar desde la consola, ejecuta el siguiente comando
 // desde el directorio raíz del proyecto:
-// node api/scripts/pokemon.import
+// node api/scripts/pokemon-1-1025.import.js
