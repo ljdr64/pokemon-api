@@ -34,7 +34,7 @@ router.get(
       // Formatear los Pokémon para la respuesta
       const formattedPokemons = paginatedPokemons.map((pokemon) => ({
         name: pokemon.name,
-        url: `${req.protocol}://${req.get('host')}/api/v1/pokeinfo/${
+        url: `${req.protocol}://${req.get('host')}/api/v1/pokemon/${
           pokemon.id
         }`,
       }));
@@ -46,15 +46,12 @@ router.get(
       if (offset > 0)
         prevLink = `${req.protocol}://${req.get(
           'host'
-        )}/api/v1/pokeinfo?offset=${Math.max(
-          offset - limit,
-          0
-        )}&limit=${limit}`;
+        )}/api/v1/pokemon?offset=${Math.max(offset - limit, 0)}&limit=${limit}`;
 
       if (offset + limit < totalPokemons) {
         nextLink = `${req.protocol}://${req.get(
           'host'
-        )}/api/v1/pokeinfo?offset=${offset + limit}&limit=${limit}`;
+        )}/api/v1/pokemon?offset=${offset + limit}&limit=${limit}`;
       } else {
         nextLink = null;
       }

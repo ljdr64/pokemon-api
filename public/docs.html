@@ -341,7 +341,7 @@
       <h3>Obtener información de un Pokémon específico</h3>
       <p class="code-container">
         <span class="code-get-button">GET</span>
-        https://{api_url}/api/v1/pokeinfo/{id}
+        https://{api_url}/api/v1/pokemon/{id}
       </p>
       <p>- Devuelve información detallada sobre un Pokémon específico identificado
         por su ID.</p>
@@ -354,6 +354,7 @@
       <h4>Respuestas</h4>
       <ul>
         <li><strong>200 OK</strong>: Se devuelve la información del Pokémon solicitado.</li>
+        <li><strong>400 Bad Request</strong>: El ID proporcionado debe ser un número entero.</li>
         <li><strong>404 Not Found</strong>: No se encontró ningún Pokémon con el ID especificado.</li>
       </ul>
 
@@ -361,15 +362,16 @@
 
       <p class="code-container">
         <span class="code-get-button">GET</span>
-        https://{api_url}/api/v1/pokeinfo/25
+        https://{api_url}/api/v1/pokemon/25
       </p>
 
       <h4>Ejemplo de respuesta (200 OK)</h4>
 
-
       <pre class="json-viewer" id="json-viewer-1"></pre>
 
-      <script src="./script.js"></script>
+      <h4>Ejemplo de respuesta (400 Bad Request)</h4>
+
+      <pre class="json-viewer" id="json-error-2"></pre>
 
       <h4>Ejemplo de respuesta (404 Not Found)</h4>
 

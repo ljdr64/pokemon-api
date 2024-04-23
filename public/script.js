@@ -34,7 +34,15 @@ document.addEventListener(
     };
 
     const jsonError = {
-      error: 'No se encontró ningún Pokémon con el ID especificado.',
+      statusCode: 404,
+      error: 'Not Found',
+      message: 'Pokemon not found',
+    };
+
+    const jsonError2 = {
+      statusCode: 400,
+      error: 'Bad Request',
+      message: '"id" must be a number',
     };
 
     const jsonGet = {
@@ -101,7 +109,13 @@ document.addEventListener(
     // Llamar a la función para mostrar el JSON en diferentes contenedores
     showJSONInView(jsonData1, 'json-viewer-1');
     showJSONInView(jsonError, 'json-error');
+    showJSONInView(jsonError2, 'json-error-2');
     showJSONInView(jsonGet, 'json-get');
   },
   { once: true }
+);
+
+document.body.innerHTML = document.body.innerHTML.replace(
+  /{api_url}/g,
+  'pokemon-api-opal.vercel.app'
 );

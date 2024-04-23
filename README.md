@@ -23,23 +23,19 @@
 
 ### Endpoints
 
-- `GET /api/v1/pokeinfo`: Obtiene todos los recursos.
-- `GET /api/v1/pokeinfo/:id`: Obtiene un recurso por su ID.
+- `GET /api/v1/pokemon`: Obtiene todos los recursos.
+- `GET /api/v1/pokemon/:id`: Obtiene un recurso por su ID.
 
-#### Ejemplo de respuesta exitosa (200 OK) (GET /api/v1/pokeinfo/25)
+#### Ejemplo de respuesta exitosa (200 OK)
+
+#### (GET /api/v1/pokemon/25)
 
 ```json
 {
-  "abilities": [
-    "static",
-    "lightning-rod"
-  ],
+  "abilities": ["static", "lightning-rod"],
   "base_experience": 112,
   "height": 4,
-  "held_items": [
-    "oran-berry",
-    "light-ball"
-  ],
+  "held_items": ["oran-berry", "light-ball"],
   "id": 25,
   "name": "pikachu",
   "order": 35,
@@ -58,10 +54,18 @@
     "special-defense": 50,
     "speed": 90
   },
-  "types": [
-    "electric"
-  ],
+  "types": ["electric"],
   "weight": 60
+}
+```
+
+#### Ejemplo de respuesta de error (400 Bad Request)
+
+```json
+{
+  "statusCode": 400,
+  "error": "Bad Request",
+  "message": "\"id\" must be a number"
 }
 ```
 
@@ -69,7 +73,9 @@
 
 ```json
 {
-  "error": "No se encontró ningún Pokémon con el ID especificado."
+  "statusCode": 404,
+  "error": "Not Found",
+  "message": "Pokemon not found"
 }
 ```
 
@@ -88,7 +94,7 @@
 - **stats** ➔ Array of objects
 - **types** ➔ Array of strings
 - **weight** ➔ Integer
-  
+
 ## Configuración de Sequelize
 
 La configuración de Sequelize se encuentra en el archivo `libs/sequelize.js`. Asegúrate de actualizar este archivo con la información correcta de tu base de datos PostgreSQL.
