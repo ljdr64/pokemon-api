@@ -17,21 +17,15 @@ router.get(
   validatorHandler(queryPokemonSchema, 'query'),
   async (req, res, next) => {
     try {
-      // Definir el límite de elementos por página
-      const limit = parseInt(req.query.limit) || 20; // Por defecto, mostraremos 20 elementos por página
-
-      // Calcular el offset basado en el número de página y el límite
-      const offset = parseInt(req.query.offset) || 0; // Por defecto, el desplazamiento será 0 si no se proporciona
+      const limit = parseInt(req.query.limit) || 20;
+      const offset = parseInt(req.query.offset) || 0;
 
       const { pokemons, total: totalPokemons } = await service.find(req.query);
 
-      // Ordenar los Pokémon por su ID numérica
       pokemons.sort((a, b) => a.id - b.id);
 
-      // Obtener los Pokémon para la página solicitada
       const paginatedPokemons = pokemons.slice(0, 20);
 
-      // Formatear los Pokémon para la respuesta
       const formattedPokemons = paginatedPokemons.map((pokemon) => ({
         name: pokemon.name,
         url: `${req.protocol}://${req.get('host')}/api/v1/pokemon/${
@@ -39,7 +33,6 @@ router.get(
         }`,
       }));
 
-      // Crear enlaces para la paginación
       let nextLink = null;
       let prevLink = null;
 
@@ -56,7 +49,6 @@ router.get(
         nextLink = null;
       }
 
-      // Enviar la respuesta con los resultados paginados y enlaces de paginación
       res.json({
         count: totalPokemons,
         next: nextLink,

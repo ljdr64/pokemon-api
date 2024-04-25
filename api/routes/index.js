@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const pokemonsRouter = require('./pokemons.router');
+const pokemonsSpeciesRouter = require('./pokemons_species.router');
 
 function routerApi(app) {
   const router = express.Router();
@@ -18,6 +19,7 @@ function routerApi(app) {
   // Montar el enrutador de pokemons
   app.use('/api/v1', router);
   router.use('/pokemon', pokemonsRouter);
+  router.use('/pokemon-species', pokemonsSpeciesRouter);
 }
 
 module.exports = routerApi;
