@@ -33,10 +33,29 @@ document.addEventListener(
       weight: 60,
     };
 
+    const jsonData2 = {
+      base_happiness: 50,
+      capture_rate: 190,
+      color: 'yellow',
+      egg_groups: ['ground', 'fairy'],
+      evolution_chain: {
+        base_evolution: 'pichu',
+        first_evolution: 'pikachu',
+        second_evolution: 'raichu',
+      },
+      generation: 'generation-i',
+      growth_rate: 'medium',
+      habitat: 'forest',
+      id: 25,
+      is_baby: false,
+      name: 'pikachu',
+      shape: 'quadruped',
+    };
+
     const jsonError = {
       statusCode: 404,
       error: 'Not Found',
-      message: 'Pokemon not found',
+      message: '{resource} not found',
     };
 
     const jsonError2 = {
@@ -72,6 +91,24 @@ document.addEventListener(
       weight: 0,
     };
 
+    const jsonGet2 = {
+      base_happiness: 0,
+      capture_rate: 0,
+      color: 'color',
+      egg_groups: ['egg_group'],
+      evolution_chain: {
+        base_evolution: 'base_evolution',
+        first_evolution: 'first_evolution',
+        second_evolution: 'second_evolution',
+      },
+      generation: 'generation',
+      growth_rate: 'growth_rate',
+      habitat: 'habitat',
+      id: 0,
+      is_baby: false,
+      name: 'name',
+      shape: 'shape',
+    };
     // Función para resaltar la sintaxis del JSON
     function syntaxHighlight(json) {
       json = JSON.stringify(json, null, 2);
@@ -108,9 +145,11 @@ document.addEventListener(
 
     // Llamar a la función para mostrar el JSON en diferentes contenedores
     showJSONInView(jsonData1, 'json-viewer-1');
+    showJSONInView(jsonData2, 'json-viewer-2');
     showJSONInView(jsonError, 'json-error');
     showJSONInView(jsonError2, 'json-error-2');
     showJSONInView(jsonGet, 'json-get');
+    showJSONInView(jsonGet2, 'json-get-2');
   },
   { once: true }
 );
