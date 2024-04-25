@@ -3,11 +3,11 @@ const express = require('express');
 const PokemonSpeciesService = require('../services/pokemon_species.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {
-  // createPokemonSpeciesSchema,
+  createPokemonSpeciesSchema,
   // updatePokemonSpeciesSchema,
   getPokemonSpeciesSchema,
   queryPokemonSpeciesSchema,
-} = require('../schemas/pokemon.schema');
+} = require('../schemas/pokemon_species.schema');
 
 const router = express.Router();
 const service = new PokemonSpeciesService();
@@ -82,19 +82,19 @@ router.get(
   }
 );
 
-// router.post(
-//   '/',
-//   validatorHandler(createPokemonSpeciesSchema, 'body'),
-//   async (req, res, next) => {
-//     try {
-//       const body = req.body;
-//       const newPokemonSpecies = await service.create(body);
-//       res.status(201).json(newPokemonSpecies);
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// );
+router.post(
+  '/',
+  validatorHandler(createPokemonSpeciesSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newPokemonSpecies = await service.create(body);
+      res.status(201).json(newPokemonSpecies);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 // router.patch(
 //   '/:id',
@@ -112,18 +112,18 @@ router.get(
 //   }
 // );
 
-// router.delete(
-//   '/:id',
-//   validatorHandler(getPokemonSpeciesSchema, 'params'),
-//   async (req, res, next) => {
-//     try {
-//       const { id } = req.params;
-//       await service.delete(id);
-//       res.status(201).json({ id });
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// );
+router.delete(
+  '/:id',
+  validatorHandler(getPokemonSpeciesSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      await service.delete(id);
+      res.status(201).json({ id });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;

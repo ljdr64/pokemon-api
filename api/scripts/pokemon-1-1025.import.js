@@ -36,7 +36,7 @@ async function importPokemonData() {
 
       // Enviar los datos a tu API
       const apiResponse = await axios.post(
-        'http://localhost:3000/api/v1/pokeinfo',
+        'http://localhost:3000/api/v1/pokemon',
         pokemon
       );
 

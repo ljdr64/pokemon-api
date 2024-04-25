@@ -3,18 +3,18 @@ const Joi = require('joi');
 const id = Joi.number().integer();
 const name = Joi.string().required();
 const color = Joi.string();
-const base_happiness = Joi.number().integer();
+const base_happiness = Joi.number().integer().allow(null);
 const capture_rate = Joi.number().integer();
-const habitat = Joi.string();
+const habitat = Joi.string().allow(null);
 const evolution_chain = Joi.object({
-  base_evolution: Joi.string(),
+  base_evolution: Joi.string().allow(null),
   first_evolution: Joi.string().allow(null),
   second_evolution: Joi.string().allow(null),
 });
 const generation = Joi.string();
 const is_baby = Joi.boolean();
 const growth_rate = Joi.string();
-const shape = Joi.string();
+const shape = Joi.string().allow(null);
 const egg_groups = Joi.array();
 
 const limit = Joi.number().integer();

@@ -1,0 +1,21 @@
+{
+  "base_happiness": 70,
+  "capture_rate": 45,
+  "color": "green",
+  "egg_groups": [
+    "monster",
+    "grass"
+  ],
+  "evolution_chain": {
+    "base_evolution": "bulbasaur",
+    "first_evolution": "ivysaur",
+    "second_evolution": "venusaur"
+  },
+  "generation": "generation-i",
+  "growth_rate": "medium-slow",
+  "habitat": "grassland",
+  "id": 1,
+  "is_baby": false,
+  "name": "bulbasaur",
+  "shape": "quadruped"
+}

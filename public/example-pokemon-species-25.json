@@ -1,0 +1,21 @@
+{
+  "base_happiness": 50,
+  "capture_rate": 190,
+  "color": "yellow",
+  "egg_groups": [
+    "ground",
+    "fairy"
+  ],
+  "evolution_chain": {
+    "base_evolution": "pichu",
+    "first_evolution": "pikachu",
+    "second_evolution": "raichu"
+  },
+  "generation": "generation-i",
+  "growth_rate": "medium",
+  "habitat": "forest",
+  "id": 25,
+  "is_baby": false,
+  "name": "pikachu",
+  "shape": "quadruped"
+}
