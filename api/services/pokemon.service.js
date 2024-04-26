@@ -1,6 +1,7 @@
 const boom = require('@hapi/boom');
 
 const { models } = require('./../libs/sequelize');
+const { Op } = require('sequelize');
 
 class PokemonService {
   constructor() {}
@@ -25,8 +26,16 @@ class PokemonService {
     return { pokemons, total: totalPokemons };
   }
 
-  async findOne(id) {
-    const pokemon = await models.Pokemon.findByPk(id);
+  async findOne(identifier) {
+    let pokemon;
+    const id = parseInt(identifier);
+    if (!isNaN(id)) {
+      pokemon = await models.Pokemon.findByPk(id);
+    } else {
+      pokemon = await models.Pokemon.findOne({
+        where: { name: identifier },
+      });
+    }
     if (!pokemon) {
       throw boom.notFound('Pokemon not found');
     }

@@ -341,15 +341,15 @@
       <h3>Obtener información de un Pokémon específico</h3>
       <p class="code-container">
         <span class="code-get-button">GET</span>
-        https://{api_url}/api/v1/pokemon/{id}
+        https://{api_url}/api/v1/pokemon/id_or_name
       </p>
       <p>- Devuelve información detallada sobre un Pokémon específico identificado
-        por su ID.</p>
+        por su ID o Nombre.</p>
 
       <h3>Obtener información de Pokémon-Species de un Pokémon específico</h3>
       <p class="code-container">
         <span class="code-get-button">GET</span>
-        https://{api_url}/api/v1/pokemon-species/{id}
+        https://{api_url}/api/v1/pokemon-species/id
       </p>
       <p>- Devuelve información detallada sobre Pokémon-Species de un Pokémon específico identificado
         por su ID.</p>
@@ -357,6 +357,7 @@
       <h4>Parámetros de la solicitud</h4>
       <ul>
         <li><code class="code-container">id</code>: El ID numérico único del Pokémon que se desea obtener.</li>
+        <li><code class="code-container">name</code>: El Nombre del Pokémon que se desea obtener.</li>
       </ul>
 
       <h4>Respuestas</h4>

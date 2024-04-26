@@ -5,6 +5,7 @@ const base_experience = Joi.number().integer();
 const height = Joi.number().integer();
 const held_items = Joi.array();
 const id = Joi.number().integer();
+const idOrName = Joi.alternatives().try(Joi.number().integer(), Joi.string());
 const name = Joi.string();
 const order = Joi.number().integer();
 const sprites = Joi.object({
@@ -49,7 +50,7 @@ const updatePokemonSchema = Joi.object({
 });
 
 const getPokemonSchema = Joi.object({
-  id: id.required(),
+  id: idOrName.required(),
 });
 
 const queryPokemonSchema = Joi.object({
