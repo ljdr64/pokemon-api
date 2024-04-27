@@ -1,7 +1,6 @@
 const boom = require('@hapi/boom');
 
 const { models } = require('./../libs/sequelize');
-const { Op } = require('sequelize');
 
 class PokemonService {
   constructor() {}
@@ -18,6 +17,8 @@ class PokemonService {
       options.limit = limit;
       options.offset = offset;
     }
+
+    options.order = [['id', 'ASC']];
 
     const result = await models.Pokemon.findAndCountAll(options);
     const pokemons = result.rows;

@@ -22,9 +22,9 @@ router.get(
 
       const { pokemons, total: totalPokemons } = await service.find(req.query);
 
-      pokemons.sort((a, b) => a.id - b.id);
+      const sortedPokemons = pokemons.sort((a, b) => a.id - b.id);
 
-      const paginatedPokemons = pokemons.slice(0, 20);
+      const paginatedPokemons = sortedPokemons.slice(0, 20);
 
       const formattedPokemons = paginatedPokemons.map((pokemon) => ({
         name: pokemon.name,
