@@ -7,9 +7,15 @@ const base_happiness = Joi.number().integer().allow(null);
 const capture_rate = Joi.number().integer();
 const habitat = Joi.string().allow(null);
 const evolution_chain = Joi.object({
-  base_evolution: Joi.string().allow(null),
-  first_evolution: Joi.string().allow(null),
-  second_evolution: Joi.string().allow(null),
+  base_evolution: Joi.alternatives()
+    .try(Joi.object(), Joi.string())
+    .allow(null),
+  first_evolution: Joi.alternatives()
+    .try(Joi.object(), Joi.string())
+    .allow(null),
+  second_evolution: Joi.alternatives()
+    .try(Joi.object(), Joi.string())
+    .allow(null),
 });
 const generation = Joi.string();
 const is_baby = Joi.boolean();
