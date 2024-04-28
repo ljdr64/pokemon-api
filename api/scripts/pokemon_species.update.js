@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function updatePokemonData() {
   try {
-    for (let id = 19; id <= 1025; id++) {
+    for (let id = 1; id <= 1025; id++) {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon-species/${id}`
       );

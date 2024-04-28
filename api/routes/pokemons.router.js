@@ -24,7 +24,7 @@ router.get(
 
       const sortedPokemons = pokemons.sort((a, b) => a.id - b.id);
 
-      const paginatedPokemons = sortedPokemons.slice(0, 20);
+      const paginatedPokemons = sortedPokemons.slice(0, limit);
 
       const formattedPokemons = paginatedPokemons.map((pokemon) => ({
         name: pokemon.name,

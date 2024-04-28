@@ -18,6 +18,8 @@ class PokemonSpeciesService {
       options.offset = offset;
     }
 
+    options.order = [['id', 'ASC']];
+
     const result = await models.PokemonSpecies.findAndCountAll(options);
     const pokemonSpeciesList = result.rows;
     const totalPokemonSpecies = result.count;

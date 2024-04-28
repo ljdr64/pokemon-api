@@ -23,9 +23,11 @@ router.get(
       const { pokemonSpeciesList, total: totalPokemonSpecies } =
         await service.find(req.query);
 
-      pokemonSpeciesList.sort((a, b) => a.id - b.id);
+      const sortedPokemonSpeciesList = pokemonSpeciesList.sort(
+        (a, b) => a.id - b.id
+      );
 
-      const paginatedPokemonSpecies = pokemonSpeciesList.slice(0, 20);
+      const paginatedPokemonSpecies = sortedPokemonSpeciesList.slice(0, limit);
 
       const formattedPokemonSpecies = paginatedPokemonSpecies.map(
         (pokemonSpecies) => ({
