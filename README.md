@@ -27,7 +27,7 @@
 
 - `GET /api/v1/pokemon`: Obtiene todos los Pokemon.
 - `GET /api/v1/pokemon/:id`: Obtiene un Pokemon por su ID.
-- `GET /api/v1/pokemon/name/:name`: Obtiene un Pokemon por su nombre.
+- `GET /api/v1/pokemon/:name`: Obtiene un Pokemon por su nombre.
 
 ### Pokemon Species
 

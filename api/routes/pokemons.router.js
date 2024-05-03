@@ -28,23 +28,28 @@ router.get(
 
       const formattedPokemons = paginatedPokemons.map((pokemon) => ({
         name: pokemon.name,
-        url: `${req.protocol}://${req.get('host')}/api/v1/pokemon/${
-          pokemon.id
-        }`,
+        url: `${req.headers['x-forwarded-proto'] || req.protocol}://${req.get(
+          'host'
+        )}/api/v1/pokemon/${pokemon.id}`,
       }));
 
       let nextLink = null;
       let prevLink = null;
 
       if (offset > 0)
-        prevLink = `${req.protocol}://${req.get(
-          'host'
-        )}/api/v1/pokemon?offset=${Math.max(offset - limit, 0)}&limit=${limit}`;
+        prevLink = `${
+          req.headers['x-forwarded-proto'] || req.protocol
+        }://${req.get('host')}/api/v1/pokemon?offset=${Math.max(
+          offset - limit,
+          0
+        )}&limit=${limit}`;
 
       if (offset + limit < totalPokemons) {
-        nextLink = `${req.protocol}://${req.get(
-          'host'
-        )}/api/v1/pokemon?offset=${offset + limit}&limit=${limit}`;
+        nextLink = `${
+          req.headers['x-forwarded-proto'] || req.protocol
+        }://${req.get('host')}/api/v1/pokemon?offset=${
+          offset + limit
+        }&limit=${limit}`;
       } else {
         nextLink = null;
       }

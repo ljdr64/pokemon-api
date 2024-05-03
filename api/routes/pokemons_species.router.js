@@ -3,8 +3,8 @@ const express = require('express');
 const PokemonSpeciesService = require('../services/pokemon_species.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {
-  createPokemonSpeciesSchema,
-  updatePokemonSpeciesSchema,
+  // createPokemonSpeciesSchema,
+  // updatePokemonSpeciesSchema,
   getPokemonSpeciesSchema,
   queryPokemonSpeciesSchema,
 } = require('../schemas/pokemon_species.schema');
@@ -32,9 +32,9 @@ router.get(
       const formattedPokemonSpecies = paginatedPokemonSpecies.map(
         (pokemonSpecies) => ({
           name: pokemonSpecies.name,
-          url: `${req.protocol}://${req.get('host')}/api/v1/pokemon-species/${
-            pokemonSpecies.id
-          }`,
+          url: `${req.headers['x-forwarded-proto'] || req.protocol}://${req.get(
+            'host'
+          )}/api/v1/pokemon-species/${pokemonSpecies.id}`,
         })
       );
 
@@ -42,18 +42,20 @@ router.get(
       let prevLink = null;
 
       if (offset > 0) {
-        prevLink = `${req.protocol}://${req.get(
-          'host'
-        )}/api/v1/pokemon-species?offset=${Math.max(
+        prevLink = `${
+          req.headers['x-forwarded-proto'] || req.protocol
+        }://${req.get('host')}/api/v1/pokemon-species?offset=${Math.max(
           offset - limit,
           0
         )}&limit=${limit}`;
       }
 
       if (offset + limit < totalPokemonSpecies) {
-        nextLink = `${req.protocol}://${req.get(
-          'host'
-        )}/api/v1/pokemon-species?offset=${offset + limit}&limit=${limit}`;
+        nextLink = `${
+          req.headers['x-forwarded-proto'] || req.protocol
+        }://${req.get('host')}/api/v1/pokemon-species?offset=${
+          offset + limit
+        }&limit=${limit}`;
       } else {
         nextLink = null;
       }
@@ -84,48 +86,48 @@ router.get(
   }
 );
 
-router.post(
-  '/',
-  validatorHandler(createPokemonSpeciesSchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const body = req.body;
-      const newPokemonSpecies = await service.create(body);
-      res.status(201).json(newPokemonSpecies);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.post(
+//   '/',
+//   validatorHandler(createPokemonSpeciesSchema, 'body'),
+//   async (req, res, next) => {
+//     try {
+//       const body = req.body;
+//       const newPokemonSpecies = await service.create(body);
+//       res.status(201).json(newPokemonSpecies);
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
-router.patch(
-  '/:id',
-  validatorHandler(getPokemonSpeciesSchema, 'params'),
-  validatorHandler(updatePokemonSpeciesSchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const pokemonSpecies = await service.update(id, body);
-      res.json(pokemonSpecies);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.patch(
+//   '/:id',
+//   validatorHandler(getPokemonSpeciesSchema, 'params'),
+//   validatorHandler(updatePokemonSpeciesSchema, 'body'),
+//   async (req, res, next) => {
+//     try {
+//       const { id } = req.params;
+//       const body = req.body;
+//       const pokemonSpecies = await service.update(id, body);
+//       res.json(pokemonSpecies);
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
-router.delete(
-  '/:id',
-  validatorHandler(getPokemonSpeciesSchema, 'params'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({ id });
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.delete(
+//   '/:id',
+//   validatorHandler(getPokemonSpeciesSchema, 'params'),
+//   async (req, res, next) => {
+//     try {
+//       const { id } = req.params;
+//       await service.delete(id);
+//       res.status(201).json({ id });
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
 module.exports = router;
