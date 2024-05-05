@@ -4,7 +4,7 @@ const PokemonSpeciesService = require('../services/pokemon_species.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {
   // createPokemonSpeciesSchema,
-  // updatePokemonSpeciesSchema,
+  updatePokemonSpeciesSchema,
   getPokemonSpeciesSchema,
   queryPokemonSpeciesSchema,
 } = require('../schemas/pokemon_species.schema');
@@ -100,21 +100,21 @@ router.get(
 //   }
 // );
 
-// router.patch(
-//   '/:id',
-//   validatorHandler(getPokemonSpeciesSchema, 'params'),
-//   validatorHandler(updatePokemonSpeciesSchema, 'body'),
-//   async (req, res, next) => {
-//     try {
-//       const { id } = req.params;
-//       const body = req.body;
-//       const pokemonSpecies = await service.update(id, body);
-//       res.json(pokemonSpecies);
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// );
+router.patch(
+  '/:id',
+  validatorHandler(getPokemonSpeciesSchema, 'params'),
+  validatorHandler(updatePokemonSpeciesSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const pokemonSpecies = await service.update(id, body);
+      res.json(pokemonSpecies);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 // router.delete(
 //   '/:id',

@@ -6,17 +6,15 @@ const color = Joi.string();
 const base_happiness = Joi.number().integer().allow(null);
 const capture_rate = Joi.number().integer();
 const habitat = Joi.string().allow(null);
-const evolution_chain = Joi.object({
-  base_evolution: Joi.alternatives()
-    .try(Joi.object(), Joi.string())
-    .allow(null),
-  first_evolution: Joi.alternatives()
-    .try(Joi.object(), Joi.string())
-    .allow(null),
-  second_evolution: Joi.alternatives()
-    .try(Joi.object(), Joi.string())
-    .allow(null),
+const evolutionObject = Joi.object({
+  base_evolution: Joi.object().allow(null),
+  first_evolution: Joi.object().allow(null),
+  second_evolution: Joi.object().allow(null),
 });
+const evolution_chain = Joi.alternatives().try(
+  Joi.array().items(evolutionObject),
+  evolutionObject
+);
 const generation = Joi.string();
 const is_baby = Joi.boolean();
 const growth_rate = Joi.string();
