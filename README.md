@@ -101,20 +101,22 @@
   "capture_rate": 190,
   "color": "yellow",
   "egg_groups": ["ground", "fairy"],
-  "evolution_chain": {
-    "base_evolution": {
-      "id": 172,
-      "name": "pichu"
-    },
-    "first_evolution": {
-      "id": 25,
-      "name": "pikachu"
-    },
-    "second_evolution": {
-      "id": 26,
-      "name": "raichu"
+  "evolution_chain": [
+    {
+      "base_evolution": {
+        "id": 172,
+        "name": "pichu"
+      },
+      "first_evolution": {
+        "id": 25,
+        "name": "pikachu"
+      },
+      "second_evolution": {
+        "id": 26,
+        "name": "raichu"
+      }
     }
-  },
+  ],
   "generation": "generation-i",
   "growth_rate": "medium",
   "habitat": "forest",
@@ -178,7 +180,7 @@
 - **capture_rate** ➔ Integer. Tasa de captura del Pokémon (entre 0 y 255).
 - **color** ➔ String. El color predominante del Pokémon.
 - **egg_groups** ➔ Array of strings. Grupos de huevos a los que pertenece el Pokémon.
-- **evolution_chain** ➔ Object. Información sobre la cadena evolutiva del Pokémon.
+- **evolution_chain** ➔ Array of objects. Información sobre la cadena evolutiva del Pokémon.
   - **base_evolution** ➔ Object. La primera etapa de la evolución.
     - **id** ➔ Integer.
     - **name** ➔ String.
