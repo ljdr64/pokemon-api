@@ -38,20 +38,22 @@ document.addEventListener(
       capture_rate: 190,
       color: 'yellow',
       egg_groups: ['ground', 'fairy'],
-      evolution_chain: {
-        base_evolution: {
-          id: 172,
-          name: 'pichu',
+      evolution_chain: [
+        {
+          base_evolution: {
+            id: 172,
+            name: 'pichu',
+          },
+          first_evolution: {
+            id: 25,
+            name: 'pikachu',
+          },
+          second_evolution: {
+            id: 26,
+            name: 'raichu',
+          },
         },
-        first_evolution: {
-          id: 25,
-          name: 'pikachu',
-        },
-        second_evolution: {
-          id: 26,
-          name: 'raichu',
-        },
-      },
+      ],
       generation: 'generation-i',
       growth_rate: 'medium',
       habitat: 'forest',
@@ -105,20 +107,22 @@ document.addEventListener(
       capture_rate: 0,
       color: 'color',
       egg_groups: ['egg_group'],
-      evolution_chain: {
-        base_evolution: {
-          id: 0,
-          name: 'base_evolution',
+      evolution_chain: [
+        {
+          base_evolution: {
+            id: 0,
+            name: 'base_evolution',
+          },
+          first_evolution: {
+            id: 0,
+            name: 'first_evolution',
+          },
+          second_evolution: {
+            id: 0,
+            name: 'second_evolution',
+          },
         },
-        first_evolution: {
-          id: 0,
-          name: 'first_evolution',
-        },
-        second_evolution: {
-          id: 0,
-          name: 'second_evolution',
-        },
-      },
+      ],
       generation: 'generation',
       growth_rate: 'growth_rate',
       habitat: 'habitat',

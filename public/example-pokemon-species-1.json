@@ -6,20 +6,22 @@
     "monster",
     "grass"
   ],
-  "evolution_chain": {
-    "base_evolution": {
-      "id": 1,
-      "name": "bulbasaur"
-    },
-    "first_evolution": {
-      "id": 2,
-      "name": "ivysaur"
-    },
-    "second_evolution": {
-      "id": 3,
-      "name": "venusaur"
+  "evolution_chain": [
+    {
+      "base_evolution": {
+        "id": 1,
+        "name": "bulbasaur"
+      },
+      "first_evolution": {
+        "id": 2,
+        "name": "ivysaur"
+      },
+      "second_evolution": {
+        "id": 3,
+        "name": "venusaur"
+      }
     }
-  },
+  ],
   "generation": "generation-i",
   "growth_rate": "medium-slow",
   "habitat": "grassland",

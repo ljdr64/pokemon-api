@@ -10,6 +10,7 @@ async function fetchAndUpdatePokemon(id) {
     const response = await axios.get(`${BASE_URL}${id}`);
     const speciesData = response.data;
 
+    // Cambio de estructura de datos
     const speciesInfo = {
       name: speciesData.name,
       evolution_chain: [speciesData.evolution_chain], // Asegurar que sea un array

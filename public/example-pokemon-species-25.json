@@ -6,20 +6,22 @@
     "ground",
     "fairy"
   ],
-  "evolution_chain": {
-    "base_evolution": {
-      "id": 172,
-      "name": "pichu"
-    },
-    "first_evolution": {
-      "id": 25,
-      "name": "pikachu"
-    },
-    "second_evolution": {
-      "id": 26,
-      "name": "raichu"
+  "evolution_chain": [
+    {
+      "base_evolution": {
+        "id": 172,
+        "name": "pichu"
+      },
+      "first_evolution": {
+        "id": 25,
+        "name": "pikachu"
+      },
+      "second_evolution": {
+        "id": 26,
+        "name": "raichu"
+      }
     }
-  },
+  ],
   "generation": "generation-i",
   "growth_rate": "medium",
   "habitat": "forest",
