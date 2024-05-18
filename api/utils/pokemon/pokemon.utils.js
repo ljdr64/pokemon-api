@@ -37,4 +37,13 @@ const formatPokemon = (req, pokemonList, pokemonEndpoint) => {
   }));
 };
 
-module.exports = { generatePaginationLinks, formatPokemon };
+const formatOnePokemon = (req, pokemon, pokemonEndpoint) => {
+  return {
+    name: pokemon.name,
+    url: `${req.headers['x-forwarded-proto'] || req.protocol}://${req.get(
+      'host'
+    )}/api/v1/${pokemonEndpoint}/${pokemon.id}`,
+  };
+};
+
+module.exports = { generatePaginationLinks, formatPokemon, formatOnePokemon };

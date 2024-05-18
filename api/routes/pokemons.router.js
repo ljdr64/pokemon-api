@@ -10,6 +10,7 @@ const {
 } = require('../schemas/pokemon.schema');
 const {
   formatPokemon,
+  formatOnePokemon,
   generatePaginationLinks,
 } = require('../utils/pokemon/pokemon.utils');
 
@@ -27,8 +28,6 @@ router.get(
       const { pokemonList, total: totalPokemon } = await service.find(
         req.query
       );
-
-      console.log('pokeList: ', pokemonList, ', pokeTotal: ', totalPokemon);
 
       const sortedPokemonList = pokemonList.sort((a, b) => a.id - b.id);
 
@@ -63,7 +62,24 @@ router.get(
     try {
       const { id } = req.params;
       const pokemon = await service.findOne(id);
-      res.json(pokemon);
+      const pokemonWithSpecies = pokemon.dataValues;
+      pokemonWithSpecies.species = formatOnePokemon(
+        req,
+        pokemon,
+        'pokemon-species'
+      );
+
+      const sortObjectKeys = (obj) => {
+        return Object.keys(obj)
+          .sort()
+          .reduce((result, key) => {
+            result[key] = obj[key];
+            return result;
+          }, {});
+      };
+
+      const sortedPokemonWithSpecies = sortObjectKeys(pokemonWithSpecies);
+      res.json(sortedPokemonWithSpecies);
     } catch (error) {
       next(error);
     }
