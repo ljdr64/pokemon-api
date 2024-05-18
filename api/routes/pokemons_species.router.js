@@ -8,6 +8,10 @@ const {
   getPokemonSpeciesSchema,
   queryPokemonSpeciesSchema,
 } = require('../schemas/pokemon_species.schema');
+const {
+  formatPokemon,
+  generatePaginationLinks,
+} = require('../utils/pokemon/pokemon.utils');
 
 const router = express.Router();
 const service = new PokemonSpeciesService();
@@ -29,36 +33,19 @@ router.get(
 
       const paginatedPokemonSpecies = sortedPokemonSpeciesList.slice(0, limit);
 
-      const formattedPokemonSpecies = paginatedPokemonSpecies.map(
-        (pokemonSpecies) => ({
-          name: pokemonSpecies.name,
-          url: `${req.headers['x-forwarded-proto'] || req.protocol}://${req.get(
-            'host'
-          )}/api/v1/pokemon-species/${pokemonSpecies.id}`,
-        })
+      const formattedPokemonSpecies = formatPokemon(
+        req,
+        paginatedPokemonSpecies,
+        'pokemon-species'
       );
 
-      let nextLink = null;
-      let prevLink = null;
-
-      if (offset > 0) {
-        prevLink = `${
-          req.headers['x-forwarded-proto'] || req.protocol
-        }://${req.get('host')}/api/v1/pokemon-species?offset=${Math.max(
-          offset - limit,
-          0
-        )}&limit=${limit}`;
-      }
-
-      if (offset + limit < totalPokemonSpecies) {
-        nextLink = `${
-          req.headers['x-forwarded-proto'] || req.protocol
-        }://${req.get('host')}/api/v1/pokemon-species?offset=${
-          offset + limit
-        }&limit=${limit}`;
-      } else {
-        nextLink = null;
-      }
+      const { prevLink, nextLink } = generatePaginationLinks(
+        req,
+        offset,
+        limit,
+        totalPokemonSpecies,
+        'pokemon-species'
+      );
 
       res.json({
         count: totalPokemonSpecies,

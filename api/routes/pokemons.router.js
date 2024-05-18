@@ -8,6 +8,10 @@ const {
   getPokemonSchema,
   queryPokemonSchema,
 } = require('../schemas/pokemon.schema');
+const {
+  formatPokemon,
+  generatePaginationLinks,
+} = require('../utils/pokemon/pokemon.utils');
 
 const router = express.Router();
 const service = new PokemonService();
@@ -20,45 +24,31 @@ router.get(
       const limit = parseInt(req.query.limit) || 20;
       const offset = parseInt(req.query.offset) || 0;
 
-      const { pokemons, total: totalPokemons } = await service.find(req.query);
+      const { pokemonList, total: totalPokemon } = await service.find(
+        req.query
+      );
 
-      const sortedPokemons = pokemons.sort((a, b) => a.id - b.id);
+      console.log('pokeList: ', pokemonList, ', pokeTotal: ', totalPokemon);
 
-      const paginatedPokemons = sortedPokemons.slice(0, limit);
+      const sortedPokemonList = pokemonList.sort((a, b) => a.id - b.id);
 
-      const formattedPokemons = paginatedPokemons.map((pokemon) => ({
-        name: pokemon.name,
-        url: `${req.headers['x-forwarded-proto'] || req.protocol}://${req.get(
-          'host'
-        )}/api/v1/pokemon/${pokemon.id}`,
-      }));
+      const paginatedPokemon = sortedPokemonList.slice(0, limit);
 
-      let nextLink = null;
-      let prevLink = null;
+      const formattedPokemon = formatPokemon(req, paginatedPokemon, 'pokemon');
 
-      if (offset > 0)
-        prevLink = `${
-          req.headers['x-forwarded-proto'] || req.protocol
-        }://${req.get('host')}/api/v1/pokemon?offset=${Math.max(
-          offset - limit,
-          0
-        )}&limit=${limit}`;
-
-      if (offset + limit < totalPokemons) {
-        nextLink = `${
-          req.headers['x-forwarded-proto'] || req.protocol
-        }://${req.get('host')}/api/v1/pokemon?offset=${
-          offset + limit
-        }&limit=${limit}`;
-      } else {
-        nextLink = null;
-      }
+      const { prevLink, nextLink } = generatePaginationLinks(
+        req,
+        offset,
+        limit,
+        totalPokemon,
+        'pokemon'
+      );
 
       res.json({
-        count: totalPokemons,
+        count: totalPokemon,
         next: nextLink,
         previous: prevLink,
-        results: formattedPokemons,
+        results: formattedPokemon,
       });
     } catch (error) {
       next(error);

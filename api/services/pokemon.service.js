@@ -21,10 +21,10 @@ class PokemonService {
     options.order = [['id', 'ASC']];
 
     const result = await models.Pokemon.findAndCountAll(options);
-    const pokemons = result.rows;
-    const totalPokemons = result.count;
+    const pokemonList = result.rows;
+    const totalPokemon = result.count;
 
-    return { pokemons, total: totalPokemons };
+    return { pokemonList, total: totalPokemon };
   }
 
   async findOne(identifier) {
